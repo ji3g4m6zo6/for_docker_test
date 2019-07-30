@@ -1,12 +1,14 @@
 version: '3'
 services:
   web:
-    build: ./
+    image: mrbarker/python-flask-hello
+    networks:
+      - traefik-public
     deploy:
       labels:
         - traefik.frontend.rule=Host:flask.jia.cucugi.us
         - traefik.enable=true
-        - traefik.port=80
+        - traefik.port=8080
         - traefik.tags=traefik-public
         - traefik.docker.network=traefik-public
         # Traefik service that listens to HTTP
@@ -14,3 +16,7 @@ services:
         - traefik.redirectorservice.frontend.redirect.entryPoint=https
         # Traefik service that listens to HTTPS
         - traefik.webservice.frontend.entryPoints=https
+        
+networks:
+  traefik-public:
+    external: true
