@@ -2,15 +2,15 @@ version: '3'
 services:
   web:
     build: ./
-  deploy:
-    labels:
-      - traefik.frontend.rule=Host:flask.jia.cucugi.us
-      - traefik.enable=true
-      - traefik.port=80
-      - traefik.tags=traefik-public
-      - traefik.docker.network=traefik-public
-      # Traefik service that listens to HTTP
-      - traefik.redirectorservice.frontend.entryPoints=http
-      - traefik.redirectorservice.frontend.redirect.entryPoint=https
-      # Traefik service that listens to HTTPS
-      - traefik.webservice.frontend.entryPoints=https
+    deploy:
+      labels:
+        - traefik.frontend.rule=Host:flask.jia.cucugi.us
+        - traefik.enable=true
+        - traefik.port=80
+        - traefik.tags=traefik-public
+        - traefik.docker.network=traefik-public
+        # Traefik service that listens to HTTP
+        - traefik.redirectorservice.frontend.entryPoints=http
+        - traefik.redirectorservice.frontend.redirect.entryPoint=https
+        # Traefik service that listens to HTTPS
+        - traefik.webservice.frontend.entryPoints=https
